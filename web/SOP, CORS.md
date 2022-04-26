@@ -1,4 +1,4 @@
-# SOP, Cors 이란?
+# SOP, CORS 이란?
 
 ## 📌 SOP(Single Origin Policy) - 동일 출처 정책
 CORS가 왜 생겨났는지 알아보도록 하겠습니다.
