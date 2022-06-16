@@ -78,5 +78,5 @@ Document-oriented(이하 “문서 지향”) 유형은 “문서”라는 핵�
 대표적인 제품으로는 IBM DB2, Neo4j 등이 있다.
 
 ___
-### 레퍼언스(Reference)
+### Reference
 https://www.mongodb.com/ko-kr/nosql-explained
