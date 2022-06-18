@@ -21,7 +21,7 @@ ___
 - [[Test] 테스트의 종류 및 Jest](Node.js/[Test]%20테스트의%20종류%20및%20Jest.md)
 - [require 이해하기](Node.js/require%20이해하기.md)
 ## JavaScript [🔼](#top)
-- [객체 지향 OOP](/JS/객체%20지향%20OOP.md)
+- [얕은 복사와 깊은 복사](/CS(Computer%20Science)[객체 지향 OOP](/JS/객체%20지향%20OOP.md)
 - [바벨과 웹팩](/JS/바벨과%20웹팩.md)
 - [클로저(Closure)](/JS/%ED%81%B4%EB%A1%9C%EC%A0%80(Closure).md)
 
@@ -45,15 +45,29 @@ ___
 
 
 ## Git [🔼](#top)
-- [GitHub pull request 보내기.md](/Git/GitHub%20pull%20request%20보내기.md)
-- [git 커밋컨벤션.md](/Git/git%20커밋컨벤션.md)
+- [GitHub pull request 보내기](/Git/GitHub%20pull%20request%20보내기.md)
+- [git 커밋컨벤션](/Git/git%20커밋컨벤션.md)
 
 ## 디자인 패턴 [🔼](#top)
-##  Algorithm & Data structure [🔼](#top)
+## Algorithm & Data structure [🔼](#top)
+
+- [이진탐색](/Algorithm%20%26%20Data%20structure/%5B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%5D%20%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89.md)
+- [정렬](/Algorithm%20%26%20Data%20structure/%5B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%5D%20%EC%A0%95%EB%A0%AC.md)
+- [다익스트라](/Algorithm%20%26%20Data%20structure/%EC%B5%9C%EB%8B%A8%EA%B2%BD%EB%A1%9C%5B%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC%5D.md)
+- [플로이드](/Algorithm%20%26%20Data%20structure/%EC%B5%9C%EB%8B%A8%EA%B2%BD%EB%A1%9C%5B%ED%94%8C%EB%A1%9C%EC%9D%B4%EB%93%9C%5D.md)
+
+## Data structure [🔼](#top)
+- [스택과 큐](/Algorithm%20%26%20Data%20structure/%5B%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%5D%20%EC%8A%A4%ED%83%9D%EA%B3%BC%20%ED%81%90.md)
+- [DFS와 BFS](/Algorithm%20%26%20Data%20structure/%5B%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%5D%20DFS%EC%99%80%20BFS.md)
+- [해시 테이블](/Algorithm%20%26%20Data%20structure/%5B%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%5D%20%ED%95%B4%EC%8B%9C%20%ED%85%8C%EC%9D%B4%EB%B8%94.md)
+
+## CS(Computer Science) [🔼](#top)
+- [동시성과 병렬성](/CS/동시성과%20병렬성.md)
+- [메모리상의 데이터 배치](/CS/메모리상의%20데이터%20배치.md)
+- [텍스트 표현](/CS/텍스트%20표현.md)
 
 ## DevOps [🔼](#top)
 - [EC2 용량 부족 현상](/DevOps/EC2%20용량%20부족%20현상.md)
 
-## ERROR [🔼](#top)
 
-## CS(Computer Science) [🔼](#top)
+
