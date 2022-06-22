@@ -3,17 +3,17 @@
 ## webRTC 수행과정
 p2p 영상 및 음성 통신을 하는 webRTC application 을 구성한다면, 다음 작업을 수행합니다.
 
-1. Fetching
-2. Signaling
-    1. offer 
-    2. answer 
-    3. ICE   
+- Fetching : 상대 peer 에게 보낼 사용자의 음성 및 영상 데이터를 수집합니다.
+- Signaling : 상대 peer 와 연결을 맺기 위해서, 상대 peer 의 정보를 탐색합니다. 다음 과정을 수행합니다.
+  - Exchanging session descriptions(세션 설명 교환) : offer, answer    
+  - Exchanging ICE candidates(ICE 후보자 교환) : ICE candidates
 
 ___
 
 ## 1. Fetching
 - webRTC API 인 MediaStream, getUserMedia 를 이용해 사용자의 영상 및 음성 정보를 가져옵니다. 
-- 추출한 video 나 audio 데이터 트랙들을 RTCPeerConnection 객체 실어 보내야하기 떄문에 추가합니다.
+- 추출한 video 나 audio 데이터 트랙들을 Peer-to-Peer 연결 안에다가 담아야한다. 
+- 그래서 RTCPeerConnection 객체에 addTrack 메서드를 이용해서 video 나 audio 데이터 트랙들을 stream에 추가합니다.
 
 이제 메제시들을 어떻게 구성할지에 대한 프로토콜이 필요하다. 여러가지 방법중에 하나가 시그널링 메세지 구조입니다.
 ___
@@ -25,16 +25,15 @@ Signlaing 단계는 peer와 peer가 서로를 찾을 수 있도록 돕는 중간
 시그널링 서버란 두 장치들 사이에 webRTC 커넥션을 만들기 위해, 인터넷 네트워크에서 **그 둘을 연결시키는 작업을 해주는 서버**를 말한다. 
 
 - 시그널링 서버의 프로세스는 offer , answer, ICE candidate 3가지로 이루어진다.
-- peer와 시그널링 서버의 프로세스 통해서 클라이언트를 연결시킨다.
+- peer와 시그널링 서버의 프로세스 통해서 RTC가 진행됩니다.
 
-### 2.1 offer 이벤트
+### 2.1 offer
 
-- Peer A(클라이언트)에서 offer를 만듭니다.
-- 이 offer는 세션 정보를 SDP 포맷으로 가지고 있으며, 커넥션이 이어지기를 원하는 유저에게 전달하기 위해 시그널링 서버로 보냅니다. 
-- SDP는 해상도나 형식 코덱등의 정보들의 포멧 형식이다.
-- 시그널링 서버는 Peer A로부터 받은 offer 세션 정보를 Peer B로 socket 통신으로 전달합니다.
+1. Peer A(클라이언트)에서 offer를 만듭니다.
+2. 이 offer는 세션 정보를 SDP 포맷으로 가지고 있으며, 커넥션이 이어지기를 원하는 유저에게 전달하기 위해 시그널링 서버로 보냅니다.  SDP는 해상도나 형식 코덱등의 정보들의 포멧 형식이다.
+3. 시그널링 서버는 Peer A로부터 받은 offer 세션 정보를 Peer B로 socket 통신으로 전달합니다.
 
-### 2.2 answer 이벤트
+### 2.2 answer
 - Peer B에서는 Peer A의 offer에 SDP description을 포함하는 answer 메세지를 서버로 보내야한다.
 - 서버에서는 Peer A에게 answer를 보냅니다.
   
@@ -80,7 +79,7 @@ Peer A에서 Peer B까지 단순하게 연결하는 것으로는 작동하지 �
 ICE는 이러한 작업을 수행하기 위해 STUN과 TURN 서버 둘다 혹은 하나의 서버를 사용합니다.
 
 ___
-## 일반적으로 Peer Connection이 필요한 경우는 크게 3가지다.
+## 일반적으로 Peer Connection의 경우는 크게 3가지다.
 
 ### 1. 동일한 라우터를 공유하는 경우.
 - 같은 네트워크에 접속되어 있으면 각각의 클라이언트가 서로를 찾을 수 있어 문제가 발생하지 않는다
@@ -89,11 +88,10 @@ ___
 ### 2. 서로 다른 라우터를 가지고 있는 경우.
 - STUN 서버는 컴퓨터가 공용 IP주소를 찾게 해준다.
 - 자신의 public IP주소를 알아내기 위해 STUN 서버를 사용한다.
-- 자신의 public IP주소를 토대로 시그널링 서버를 통해 장치들이 서로를 찾을 수 있게 된다.
-  
+- 자신의 public IP주소를 토대로 시그널링 서버를 통해 장치들이 서로를 찾을 수 있게 된어 PeerConnection이 가능해진다.
 ### 3.  STUN 서버에서 얻은 public IP로도 연결이 불가능한 경우
 - 연결을 중재해줄 서버가 필요하며, 이 서버는 TURN 서버라 부른다.
-- 중재 서버인 TURN 서버를 통해 통신이 이루어진다.
+- 중재 서버인 TURN 서버를 통해 PeerConnection이 이루어진다.
 
 ___
 
