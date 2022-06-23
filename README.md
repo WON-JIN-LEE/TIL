@@ -6,6 +6,10 @@
 - 개발에 도움되는 개발지식을 쌓아가기위해 정리하는 Repo입니다. 
 - 궁금했던 내용을 하나씩 정리합니다.
   
+
+
+📖 Contents
+  - [DevOps](#devops-)
 ___
 
 ## 개발 [🔼](#top)
@@ -49,7 +53,7 @@ ___
 - [git 커밋컨벤션](/Git/git%20커밋컨벤션.md)
 
 ## 디자인 패턴 [🔼](#top)
-## Algorithm & Data structure [🔼](#top)
+## Algorithm [🔼](#top)
 
 - [이진탐색](/Algorithm%20%26%20Data%20structure/%5B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%5D%20%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89.md)
 - [정렬](/Algorithm%20%26%20Data%20structure/%5B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%5D%20%EC%A0%95%EB%A0%AC.md)
