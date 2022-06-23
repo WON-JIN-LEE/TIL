@@ -1,12 +1,12 @@
 # WebRTC 프로토콜 소개
 
-## 1\. WebRTC란
+## 1. WebRTC란
 
 WebRTC(Web Real-Time Communication)는 웹 브라우저 간에 플러그인의 도움 없이 서로 통신할 수 있도록 설계된 API이다. W3C에서 제시된 초안이며, 음성 통화, 영상 통화, P2P 파일 공유 등으로 활용될 수 있다.
 
 공개 웹 표준으로 구현되며 모든 주요 브라우저에서 일반 JavaScript API로 제공한다. (Apple, Google, Microsoft 및 Mozilla가 지원)
 
-## 2\. WebRTC의 프로토콜 소개
+## 2. WebRTC의 프로토콜 소개
 
 처음에 peer 간의 서로의 위치를 알지 못하기 때문에 서버를 사용해야하고 그 서버는 peer의 위치를 각 peer들에게 위치 정보를 알려주는 역할을 한다.
 
