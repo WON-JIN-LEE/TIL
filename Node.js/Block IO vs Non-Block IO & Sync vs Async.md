@@ -1,4 +1,4 @@
-# Block IO vs Non-Block IO & Sync vs Async
+# 💻Block IO vs Non-Block IO & Sync vs Async
 
 ## IO란?
 IO는 데이터의 입력(Input)과 출력(Output)을 함께 일컫는 말이다.

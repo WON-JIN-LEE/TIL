@@ -1,33 +1,22 @@
-function deepCopy(object) {
-    if (object === null || typeof object !== "object") {
-        return object;
-    }
+var g1 = 1;
+const c1 = 2;
 
-    // 객체인지 배열인지 판단
-    const copy = Array.isArray(object) ? [] : {};
+function gfn(x) {
+    var v1 = 3;
+    const c2 = 4;
+    g1 = 11;
 
-    for (let key of Object.keys(object)) {
-        copy[key] = deepCopy(object[key]);
+    function fn(y) {
+        const c2 = 5;
+        console.log(x + v1 + c1 + g1 + c2 + y);
+
     }
-    
-    return copy;
+    fn(6)
 }
 
-const object = {
-    a: "a",
-    number: { one: 1, two: 2, },
-    arr: [1, 2, [3, 4]],
-};
+gfn(100);
 
-const copy = deepCopy(object); //재귀 함수 이용
-
-copy.number.one = 3;
-copy.arr[2].push(5);
-
-console.log(object === copy);// false
-console.log(object.number.one === copy.number.one);// false
-console.log(object.arr === copy.arr);// false
-
-console.log(object); // { a: 'a', number: { one: 1, two: 2 }, arr: [ 1, 2, [ 3, 4 ] ] }
-console.log(copy); // { a: 'a', number: { one: 3, two: 2 }, arr: [ 1, 2, [ 3, 4, 5 ] ] }
-
+if (g1 > 10) {
+    let g1 = 1000;
+}
+console.log(g1)
