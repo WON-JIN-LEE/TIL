@@ -66,6 +66,7 @@ ___
 - [Scale-up과 Scale-out](DB/Scale-up과%20Scale-out.md)
 - [mongoDB 백업 및 복구](DB/mongoDB%20백업%20및%20복구.md)
 - [mongodb모델링](DB/mongodb모델링.md)
+- [[SQL] Null 일 경우 Default 값 처리 방법](DB/[SQL]%20Null%20일%20경우%20Default%20값%20처리%20방법%20.md)
 
 
 ## Git [🔼](#top)
