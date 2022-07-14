@@ -66,8 +66,11 @@ ___
 - [Scale-up과 Scale-out](DB/Scale-up과%20Scale-out.md)
 - [mongoDB 백업 및 복구](DB/mongoDB%20백업%20및%20복구.md)
 - [mongodb모델링](DB/mongodb모델링.md)
-- [[SQL] Null 일 경우 Default 값 처리 방법](DB/[SQL]%20Null%20일%20경우%20Default%20값%20처리%20방법%20.md)
 
+## SQL [🔼](#top)
+- [[SQL] Null 일 경우 Default 값 처리 방법](DB/sql/[SQL]%20Null%20일%20경우%20Default%20값%20처리%20방법%20.md)
+- [SELECT DISTINCT 사용법 - 중복제거](DB/sql/SELECT%20DISTINCT%20사용법%20-%20중복제거.md)
+- [MySql의 Primary Key& Unique Key & Foreign Key](DB/sql/)
 
 ## Git [🔼](#top)
 - [GitHub pull request 보내기](/Git/GitHub%20pull%20request%20보내기.md)
