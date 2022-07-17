@@ -72,13 +72,16 @@ ___
 - [SELECT DISTINCT 사용법 - 중복제거](DB/sql/SELECT%20DISTINCT%20사용법%20-%20중복제거.md)
 - [MySql의 Primary Key& Unique Key & Foreign Key](DB/sql/)
 
+## 보안 [🔼](#top)
+- [단방향 암호화, Hash 암호화](보안/단방향%20암호화,%20Hash%20암호화.md)
+- [양방향 암호화, 대칭키와 비대칭키](보안/양방향%20암호화,%20대칭키와%20비대칭키.md)
+
 ## Git [🔼](#top)
 - [GitHub pull request 보내기](/Git/GitHub%20pull%20request%20보내기.md)
 - [git 커밋컨벤션](/Git/git%20커밋컨벤션.md)
 
 ## 디자인 패턴 [🔼](#top)
 ## Algorithm [🔼](#top)
-
 - [이진탐색](/Algorithm%20%26%20Data%20structure/%5B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%5D%20%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89.md)
 - [정렬](/Algorithm%20%26%20Data%20structure/%5B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%5D%20%EC%A0%95%EB%A0%AC.md)
 - [다익스트라](/Algorithm%20%26%20Data%20structure/%EC%B5%9C%EB%8B%A8%EA%B2%BD%EB%A1%9C%5B%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC%5D.md)
