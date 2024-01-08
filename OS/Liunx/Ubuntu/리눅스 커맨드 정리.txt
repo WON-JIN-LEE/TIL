@@ -9,10 +9,8 @@ $ sudo apt list --upgradable
 # 패키지 업그레이드 커맨드
 $ sudo apt upgrade -y
 
-
 # 세션 접속 시간
 $ uptime
-
 
 # 메모리 사용량 출력
 $ free
@@ -36,9 +34,53 @@ $ ls -al
 $ ls -alt (수정된 일시로 내림차순 정렬되어 출력)
 $ ls -altr (수정된 일시로 오름차순 정렬되어 출력)
 
-옵션
--a: 숨김 파일 포함
--l: 자세히 정보
--i: "inode 번호"를 출력
--t: 최근 수정된 파일이나 폴더 부터
--r: 역순
+    옵션
+    -a: 숨김 파일 포함
+    -l: 자세히 정보
+    -i: "inode 번호"를 출력
+    -t: 최근 수정된 파일이나 폴더 부터
+    -r: 역순
+
+# 파일 접근 허가 확인
+$ ls -l /etc/shadow
+
+# /etc/shadow내용 출력
+$ cat /etc/shadow
+$ sudo less /etc/shadow 명령으로 파일 읽기 시도
+
+#재시작 이후 서버가 얼마나 오래 동작 중인지 확인
+$ uptime 
+
+#명령으로 루트 계정 얻기
+$ sudo -i  
+$ sudo /bin/bash
+$ sudo su -
+
+#루트 계정에서 일반 계정으로 빠져나가기
+$ exit
+$ logout 
+CTRL+D
+
+#sudo 명령을 내린 결과를 확인
+$ less /var/log/auth.log 
+
+# /var/log/auth.log sudo만 필터링
+$ grep "sudo" /var/log/auth.log 
+
+
+#호스트 이름 변경
+$ sudo nano /etc/hostname
+
+#기존 컴퓨터 이름을 변경
+$ sudo nano /etc/hosts 
+
+
+#사용 가능한 시간대를 출력
+$ timedatectl list-timezones 
+
+#현재 시간대 출력
+$ timedatectl
+
+%%AWS와 같은 퍼블릭 클라우드에서는 default 타임존 UTC를 사용해야하고 바꾸면 안된다.%%
+
+애플리케이션 단(WAS)에서 TZ 설정을 해주는 것이 맞다.
