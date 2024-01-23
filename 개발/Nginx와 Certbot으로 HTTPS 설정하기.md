@@ -54,11 +54,11 @@ sudo vi /etc/nginx/sites-available/default
 위 명령어로 nginx 옵션에 들어가서 리다이렉션될 주소와 Cors등을 설정해 줄 수 있다.
 기본적으로 위 인증서를 발급 받으면서 자동적으로 설정이 되었있을 것이다.
 
-![img.png](../img/img.png)
+![img.png](./img/img.png)
 
 default 에서 가장 밑에 있을 해당 server 블록에서, 80포트로 들어오는 요청을 HTTPS 도메인으로 리다이렉션 되도록 설정할 수 있다. 
 
-![img.png](../img/img2.png)
+![img.png](./img/img2.png)
 
 그 바로 위에는 443포트로 들어오는 server 부분을 설정할 수 있다. 이 부분을 잘 살펴보면 certbot으로 발급 받은 인증서를 찾아 볼 수 있다.
 
