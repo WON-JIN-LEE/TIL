@@ -1,0 +1,85 @@
+# netstat 명령
+ - 네트워크 연결상태, 라우팅 테이블, 인터페이스 상태등을 보여주는 명령어
+
+options
+ - n : 호스트명, 포트명을 lookup하지 않고 그대로 ip, port번호로 보여준다
+ - a : 모든 네트웍 상태를 보여준다
+ - t : TCP 프로토콜만 보여준다
+ - u : UDP 프로토콜만 보여준다
+ - p : 해당 포트를 사용하는 프로그램과 프로세스ID(PID)를 보여준다
+ - r : 라우팅 테이블 출력
+ - s : 프로토콜별(ip, icmp, tcp, udp 등)로 통계를 보여준다
+  - c : 1초 단위로 연속적으로 보여준다
+
+Window 예시) netstat -ano | find "4545"
+linux netstat -ano | grep 4545
+
+# 맨 끝 필드인 State 필드==========================================
+
+LISTEN : 현재열려있는 포트로써 누군가의 접속을 항상 기다리고 있는 포트입니다.
+ESTABLISHED : 현재 정상적으로 연결이 된 포트로써 사용하고 있다는 의미입니다.  80번 포트에 이런 메시지가 있으면 웹브라우저를 통하고 홈폐이지를 보고 있다는 뜻입니다. < 80번 포트는 인터넷 포트입니다. >
+TIME_WAIT : 접속 후 사용이 종료되었으나 지정된 시간만큼 다른 명령이나 신호를 기다리고 있다는 의미입니다. 80번 포트는 웹브라우저의 요청에 대하여 홈폐이지 보여주기가 완전히 끝난뒤에도 다른 요청에 빨리 동작하기 위하여 15초정도 대기상태에 있습니다.
+FIN_WAIT 1 : 포트가 닫혔으며 연결이 종료되기를 기다리는 상태입니다.
+FIN_WAIT 2 : 연결이 완전히 닫힌 상태입니다.
+SYN_SENT : 원격지에서 포트를 열려고 시도하는 중을 나타냅니다. 허용된 포트외의 다른포트에서 이런 메시지가 나오면 유심이 확인해 봐야 합니다.
+SYN_RECEIVED : 서버가 원격 클라이언트로부터 접속 요구를 받아 클라이언트에게 응답을 하였지만 아직 클라이언트에게 확인 메시지는 받지 않은 상태
+CLOSING : 흔하지 않지만 주로 확인 메시지가 전송도중 분실된 상태
+UNKNOWN : 현재 포트의 상태를 알수 없다는 뜻 입니다.
+
+
+
+# 해석 방법 ==============================================================
+
+C:>netstat -ano | find ":80"
+  TCP    0.0.0.0:80             0.0.0.0:0              LISTENING       5104
+  TCP    xxx.xxx.xxx.xxx:1525    142.xxx.xxx.238:80     ESTABLISHED     9804
+  TCP    xxx.xxx.xxx.xxx:1703    183.xxx.xxx.27:80       CLOSE_WAIT      17920
+  TCP    111.222.111.222:2135     23.23.0.1:80        ESTABLISHED     18236
+  TCP    xxx.xxx.xxx.xxx:2146    23.xxx.xxx.139:80        ESTABLISHED     18236
+  TCP    xxx.xxx.xxx.xxx:2147    23.xxx.xxx.139:80        ESTABLISHED     18236
+  TCP    xxx.xxx.xxx.xxx:2148    23.xxx.xxx.139:80        ESTABLISHED     18236
+  TCP    xxx.xxx.xxx.xxx:2166    23.xxx.xxx.139:80        TIME_WAIT       0
+  TCP    xxx.xxx.xxx.xxx:2167    23.xxx.xxx.139:80        TIME_WAIT       0
+  TCP    xxx.xxx.xxx.xxx:2168    23.xxx.xxx.139:80        TIME_WAIT       0
+  TCP    xxx.xxx.xxx.xxx:2169    23.xxx.xxx.139:80        ESTABLISHED     18236
+  TCP    xxx.xxx.xxx.xxx:2464    8.xxx.xxx.254:80       TIME_WAIT       0
+  TCP    xxx.xxx.xxx.xxx:2465    104.xxx.xxx.254:80      TIME_WAIT       0
+  TCP    xxx.xxx.xxx.xxx:2466    117.xxx.xxx.29:80       TIME_WAIT       0
+  TCP    [::]:80                [::]:0                 LISTENING       5104
+
+## 클라이언트 입장에서 해석
+첫번째 ip와 포트는 로컬 Address, 두번째는 foreigne Address(외부 주소)
+ TCP    111.222.111.222:2135    23.23.0.1:80        ESTABLISHED     18236 이 행을 해석해보자면
+
+크롬을 실행 시킨 후 netstat를 실행하였습니다.
+111.222.111.222 내컴의 IP를 의미하며, 2135라는 포트를 사용하는 어떤 프로그램이 프로그램의 프로세스ID는 18236이다.
+내컴에서 킨 크롬이 23.23.0.1:80인 서버에 (ESTABLISHED) 잘 연결이 되었다 라고 해석할 수 있습니다.
+
+========================================================================
+
+C:\Users\vopgh>netstat -ano | find ":3030"
+  TCP    0.0.0.0:3030           0.0.0.0:0              LISTENING       15032
+  TCP    xxx.xxx.xxx.246:3030    xxx.xxx.xxx.82:53622     TIME_WAIT       0
+  TCP    xxx.xxx.xxx.246:3030    xxx.xxx.xxx.82:53624     TIME_WAIT       0
+  TCP    xxx.xxx.xxx.246:3030    xxx.xxx.xxx.82:53638     ESTABLISHED     15032
+  TCP    xxx.xxx.xxx.246:3030    xxx.xxx.xxx.82:53640     ESTABLISHED     15032
+  TCP    [::]:3030              [::]:0                 LISTENING       15032
+
+ ## 서버 입장에서 해석
+
+ 내컴에서 node로 간단한 웹서버를 포트 3030으로 켰을 때
+  TCP    0.0.0.0:3030           0.0.0.0:0              LISTENING       15032
+  이 행이 조회됩니다. 여기서 0.0.0.0:3030의 의미는 0.0.0.0은 any(어떠한 IP도 상관없다.)
+  즉 모든 IP에서 포트 3030으로의 접근을 허용한다라는 의미입니다.
+
+  어떠 포트가 열려있는지 확인한다면 0.0.0.0:3030, LISTENING을 확인가능하다면 포트가 열려있다고 생각하시면 됩니다.
+
+ 그리고
+
+ 서버를 켜놓은 상태에서 다른 컴에서 아까 켜놓은 node웹에 접근했을 때
+
+  TCP    111.222.111.222:3030    192.168.0.82:53638     ESTABLISHED     15032
+
+  이 와 같은 행이 조회가 되는데 해석을 해보면
+
+  192.168.0.82라는 IP를 가진 누군가의 기기에서 53638 포트를 이용하는 프로그램에서 node서버가 켜져있는 컴퓨터 서버( 111.222.111.222:3030)로 성공적으로 연결이 되었다라는 것(ESTABLISHED)을 의미합니다.
