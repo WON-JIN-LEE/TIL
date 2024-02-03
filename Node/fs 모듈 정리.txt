@@ -1,0 +1,50 @@
+
+=============================fs.readFileSync, fs.readFile 와 fs.createReadStream 사용법==============================================
+fs.readFile: 비동기 방식 (Asynchronous)
+
+```
+const fs = require('fs');
+fs.readFile('example.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error('Error reading file:', err);
+        return;
+    }
+    console.log(data);
+});
+```
+
+적합한 상황: 파일 크기가 작거나 한 번에 파일 전체를 읽어도 메모리에 적재할 수 있는 경우에 사용됩니다.
+
+
+fs.createReadStream: 비동기 방식 (Asynchronous), 스트림 사용
+
+```
+const fs = require('fs');
+const readStream = fs.createReadStream('example.txt', 'utf8');
+readStream.on('data', (chunk) => {
+    console.log(chunk);
+});
+
+readStream.on('end', () => {
+    console.log('Read operation finished.');
+});
+```
+
+동작 방식: 파일을 비동기적으로 읽어오지만, 스트림을 사용하여 파일을 작은 조각(chunk) 단위로 나누어 읽습니다.
+적합한 상황: 대용량 파일이나 큰 파일을 처리할 때, 메모리를 효율적으로 사용하고자 할 때 사용됩니다.
+
+어떤 것을 선택할지 결정할 때:
+1. 파일 크기: fs.readFile은 파일 전체를 메모리에 올려야 하므로 큰 파일의 경우 메모리 사용량이 높을 수 있습니다.
+    fs.createReadStream은 스트리밍 방식으로 작은 조각 단위로 파일을 처리할 수 있어 메모리를 효율적으로 사용할 수 있습니다.
+2. 속도 및 성능: 대용량 파일의 경우 fs.createReadStream이 일부분만 메모리에 유지하면서 처리할 수 있어 더 빠를 수 있습니다.
+3. 사용 목적: 한 번에 파일 전체를 읽어야 하는지, 아니면 스트림을 통해 조각 단위로 읽어야 하는지에 따라 선택합니다.
+
+일반적으로 파일 크기가 크거나 스트리밍이 필요한 경우에는 fs.createReadStream을 사용하는 것이 유리합니다. 작은 파일이나 한 번에 처리할 수 있는 파일의 경우에는 fs.readFileSync, fs.readFile을 사용할 수 있습니다.
+
+📌"대용량 파일"의 기준은 맥락에 따라 다를 수 있으며, 개발자 또는 시스템 환경에 따라 다르게 인식될 수 있습니다. 그러나 일반적으로 몇 메가바이트 (MB) 이상의 크기를 가진 파일은 대용량 파일로 간주됩니다.
+
+작은 파일: 몇 킬로바이트(KB)에서 몇 메가바이트(MB) 미만
+중간 파일: 몇 MB에서 몇 십 메가바이트까지
+대용량 파일: 몇 십 메가바이트 이상
+
+따라서 "대용량 파일"의 기준은 어느 정도 주관적이며, 실제로 처리할 수 있는 파일 크기는 사용하는 기기, 메모리, 네트워크 대역폭 등에 의해 영향을 받을 수 있습니다.
