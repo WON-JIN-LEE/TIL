@@ -1,0 +1,24 @@
+문제: 개발DB 파일 손상으로 인한 복구 지연에 따라 전체적인 개발 진행에 문제가 발생함
+작성 이유: 사용되고 있던 개발DB에 문제가 있을 시 새로운 DB컨테이너로 교체하여 전제적인 개발 진행에 피해를 최소화 하기 위해 로컬에서 도커로 변경을 진행하는 것이 좋을 것으로 판단됨
+
+아래는 로컬 머신에 설치된 DB의 데이터를 컨테이너MariaDB로 옮기는 과정에 필요한 커맨드를 정리하였다.
+
+#로컬 머신에서 백업 파일을 도커 컨테이너로 복사:
+docker cp backup.sql mariadb_container:/backup.sql
+
+#도커 컨테이너에 접속:
+docker exec -it mariadb_container bash
+
+#마리아DB 컨테이너 내에서 데이터베이스 복원:
+mysql -u root -p < /backup.sql
+
+# 덤프 파일 생성
+--all-databases: 전체(모든 스키마와 데이터 포함)
+mysqldump -u root -p --all-databases > backup.sql
+
+# 컨테이너에서 로컬로 파일 복사
+docker cp <container_id>:/container/path/to/file /host/path/to/destination
+
+# 예시
+docker cp 73890c7d8e3dcf8501df0a2bf9f7d114a20ad4b853:/backup.sql C:\WonJin\docker
+docker cp C:\WonJin\docker\backup.sql c0212dca53ddbc8da8a2bcc17a17639b062:/test_temp/
