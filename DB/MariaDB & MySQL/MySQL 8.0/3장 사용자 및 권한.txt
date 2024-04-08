@@ -46,3 +46,39 @@ MySQl 서버의 이중 비밀번호 기능은 하나의 계정에 대해 2개의
 
 정적 권한은 MySQL 서버의 소스코드에 고정적으로 명시돼 있는 권한을 의미한다.
 동적 권한은 MySQL 서버가 시작되면서 동적으로 생성하는 권한을 의미한다.(컴포넌트나 플러그인이 설치되면 그때 등록되는 권한 등)
+
+사용자에게 권한을 부여할 떄는 GRANT 명령을 사용한다.
+
+글로벌 권한
+mysql> GRANT SUPER ON *.* TO 'user'@'localhost';
+글로벌 권한은 특정 DB나 테이블에 부여될 수 없기 때문에 글로벌 권한을 부여할 때 GRANT 명령의 ON절에는 항상 *.*를 사용하게 된다.
+*.*은 모든 DB의 모든 오브젝트를 포함해서 MySQL 서버 전체를 의미한다. CREATE USER나 CREATE ROLE 과 같은 글로벌 권한은 DB 단위나 오브젝트 단위로 부여할 수 있는 권한이 아니므로 항상 *.*로만 댄상을 사용할 수 있다.
+
+DB 권한
+mysql> GRANT EVENT ON *.* TO 'user'@'localhost';
+mysql> GRANT EVENT ON employees.* TO 'user'@'localhost';
+DB권한은 특정 DB에 대해서만 권한을 부여하거나 서버에 존재하는 모든 DB에 대해 권한을 부여할 수 있기 때문에 위의 예제와 같이 ON절에 *.*이나 employees.* 모두 사용할 수 있다.
+DB권한의 경우 테이블까지는 명시할 수 없다.
+
+테이블 권한
+ mysql> GRANT SELECT, INSERT, UPDATE, DELETE ON *.* TO 'user'@'localhost';
+ mysql> GRANT SELECT, INSERT, UPDATE, DELETE ON emp.* TO 'user'@'localhost';
+ mysql> GRANT SELECT, INSERT, UPDATE, DELETE ON emp.department TO 'user'@'localhost';
+
+테이블 권한은 모든 DB에 대해 권한을 부여하는 것이 가능하며
+특정 DB 오브젝트에 대해서만 권한을 부여하는 것도 가능하다.
+그리고 특정 DB의 특정 테이블에 대해서만 권한을 부여하는 것도 가능하다.
+
+각 계정이나 권한에 부여된 권한이나 역할을 확인하기 위해서는 SHOW GRANTS 명령을 사용할 수 있다.
+표 형태로 보고자 한다면  mysql 권한 관련 테이블을 참조하면된다.
+
+정적권한
+- mysql.user : 계정정보 & 역할에 부여된 글로벌 권한
+- mysql.db : DB 단위로 부여된 권한
+- mysql.tables_priv : 테이블 단위
+- mysql.columns_priv : 컬럼 단위
+- mysql.procs_priv : 스토어드 프로그램 단위로 부여된 권한
+
+동적권한
+- mysql.global_grants : 계정이나 역할에 부여되는 동적 글로벌 권한
+
