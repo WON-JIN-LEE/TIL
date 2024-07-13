@@ -2,7 +2,7 @@
 SELECT VERSION()
 
 # 계정생성
-CREATE USER 'vopgh0409'@'%' IDENTIFIED BY 'paww#@drf#@##$';
+CREATE USER 'vopgh0409'@'%' IDENTIFIED BY 'new_password';
 
 # 계정에 모든 권한 부여
 GRANT ALL PRIVILEGES ON *.* TO 'vopgh0409'@'%';
@@ -12,3 +12,57 @@ SHOW GRANTS FOR 'vopgh0409'@'%';
 
 # 접속 계정 권한 확인
 SHOW GRANTS FOR CURRENT_USER()
+
+# 모든 계정 조회
+SELECT User, Host, authentication_string, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv, File_priv, Grant_priv, References_priv, Index_priv, Alter_priv, Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv, Execute_priv, Repl_slave_priv, Repl_client_priv, Create_view_priv, Show_view_priv, Create_routine_priv, Alter_routine_priv, Create_user_priv, Event_priv, Trigger_priv, Create_tablespace_priv, ssl_type, max_questions, max_updates, max_connections, max_user_connections
+FROM mysql.user;
+
+# DB 계정 비밀번호 변경(비밀번호를 알 수 없으므로) 1 또는 2 사용
+1. ALTER USER 'username'@'host' IDENTIFIED BY 'new_password';
+2. SET PASSWORD FOR 'username'@'host' = PASSWORD('new_password');
+
+
+# 이 명령어는 MySQL 서버가 권한 테이블을 다시 읽도록 하여, 새로 부여된 권한이 즉시 적용되도록 합니다.
+FLUSH PRIVILEGES;
+
+# 계정 권한 조회
+SHOW GRANTS FOR 'user1'@'%';
+
+# 계정 접근 가능 테이블 조회
+SELECT DISTINCT TABLE_SCHEMA
+FROM INFORMATION_SCHEMA.SCHEMA_PRIVILEGES
+WHERE GRANTEE = "user1'@'%'";
+
+==========================================================
+
+# 첫 번째 계정 생성:
+CREATE USER 'user1'@'%' IDENTIFIED BY 'password1';
+
+# db_lwj 데이터베이스에 대한 권한 부여:
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, INDEX ON db_lwj.* TO 'user1'@'%';
+
+# db_test 데이터베이스에 대한 권한 부여:
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, INDEX ON db_test.* TO 'user1'@'%';
+
+#권한 적용
+FLUSH PRIVILEGES;
+
+# 두 번째 계정 생성 및 권한 부여
+CREATE USER 'user2'@'%' IDENTIFIED BY 'password2';
+
+
+#db_lwj 데이터베이스에 대한 권한 부여:
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, INDEX ON db_lwj.* TO 'user2'@'%';
+
+#권한 적용:
+FLUSH PRIVILEGES;
+
+
+===========================비밀번호 정책===========================
+
+# 현재의 비밀번호 정책을 확인합니다.
+SHOW VARIABLES LIKE 'validate_password%';
+
+# 정책을 완화하려면 (예: 최소 길이를 6자로 설정하고 정책을 낮음으로 설정):
+SET GLOBAL validate_password.policy=LOW;
+SET GLOBAL validate_password.length=6;
